@@ -1,0 +1,115 @@
+/* Bendras svetainės šriftas */
+html, body {
+  font-family: "Courier New", monospace;
+  line-height: 3;
+  color: orangered;
+}
+
+/* Antraštės */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 .5em;
+  line-height: 1.2;
+  letter-spacing: .2px;
+  color: lightskyblue;
+}
+
+/* Dydžiai (desktop ~ ≥992px) */
+h1 {letter-spacing: 10px; font-size: 2.5rem; font-weight: 800; color:green;}
+h2 {letter-spacing: 5px; font-size: 1.75rem; font-weight: 700; color:red}
+h3 { font-size: 1.375rem; font-weight: 700; color:orange}
+h4 { font-size: 1.125rem; font-weight: 600; color: yellow;}
+
+/* Mažesniuose ekranuose truputį sumažinam */
+@media (max-width: 576px) {
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+/* Mygtukai */
+.btn-getstarted, .cta-btn, .php-email-form button, .service-item .read-more, .btn {
+  background:#1f7aef; color:#fff; border:none; border-radius:999px;
+  padding:.55rem 1rem; text-decoration:none;
+}
+.btn-getstarted:hover, .cta-btn:hover, .php-email-form button:hover, .service-item .read-more:hover, .btn:hover {
+  background:#1566c7;
+}
+.btn-getstarted:active, .cta-btn:active, .php-email-form button:active, .service-item .read-more:active, .btn:active {
+  background:orange;
+}
+
+/* Nuorodos */
+a{ color:pink; text-decoration:underline; }
+a:hover{ color:#095e6c; }
+a:active{ color:red; }
+
+/* Vienodi tarpai tarp sekcijų */
+#about, #resume, #portfolio { padding: 64px 0; }     /* vertikalūs tarpai */
+.section-title { margin-bottom: 24px; }              /* atstumas po antrašte */
+.section .row + .row { margin-top: 24px; }           /* tarpas tarp eilučių (row) */
+
+/* Turinio blokų vizualus atskyrimas */
+#about .container,
+#resume .container,
+#portfolio .container {
+  background: darkslategray;
+  border: 1px solid whitesmoke;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgb(130, 209, 236);
+  padding: 16px;                                     /* vidiniai tarpai aplink turinį */
+}
+
+/* === Komponentas #1: Navigacijos juosta (header/navmenu) === */
+#header.header { 
+  background:#5061a8;                 /* tamsesnė, aiškiai skiriasi nuo šablono */
+  box-shadow:0 4px 14px rgba(0,0,0,.12);
+}
+#header .navmenu a {
+  color:#e8eefc;
+  padding:.45rem .75rem;
+  border-radius:8px;                   /* lengvi kampai */
+  text-decoration:none;
+}
+#header .navmenu a:hover,
+#header .navmenu a.active {
+  background:#2a3150;
+  color:#fff;
+}
+
+/* DRĄSTUS progress bar stilius */
+.skills-showcase .progress{
+  height: 20px !important;
+  background: #111 !important;
+  border-radius: 0 !important;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+.skills-showcase .progress-bar{
+  background: repeating-linear-gradient(45deg, #30ff5d 0 12px, #ffd60a 12px 24px);
+  animation: pb-move .6s linear infinite;
+  box-shadow: none;
+}
+
+@keyframes pb-move { to { background-position: 24px 0; } }
+
+/* --- Sąrašai --- */
+.fancy-ol{counter-reset:item;list-style:none;padding-left:0}
+.fancy-ol>li{counter-increment:item;margin:.3rem 0}
+.fancy-ol>li::before{content:counter(item) ".";font-weight:700;color:greenyellow;display:inline-block;width:5ch}
+
+.fancy-ul{list-style:none;padding-left:0}
+.fancy-ul>li{position:relative;padding-left:1.1rem;margin:.3rem 0}
+.fancy-ul>li::before{content:"–";position:absolute;left:0;color:#0b7285;font-weight:700}
+/* įdėtinis (nested) */
+.fancy-ul ul{list-style:none;padding-left:1rem;margin:.3rem 0 0}
+.fancy-ul ul>li{padding-left:1rem}
+.fancy-ul ul>li::before{content:"•";left:0;color:palevioletred}
+
+/* --- Services lentelė --- */
+.svc-table{width:100%;border-collapse:collapse;text-align:center}
+.svc-table th,.svc-table td{padding:.6rem .8rem;border:1px solid #e9ecef}
+.svc-table thead th{background:lightgray;color:black;font-weight:700}
+.svc-table tbody tr:nth-child(odd){background:gray}
+.svc-table tbody tr:nth-child(even){background:darkgray}
+.svc-table tbody tr:hover{background:rgb(120, 137, 194)}
+.svc-table td:last-child{white-space:nowrap}

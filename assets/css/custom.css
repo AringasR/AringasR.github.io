@@ -113,3 +113,262 @@ a:active{ color:red; }
 .svc-table tbody tr:nth-child(even){background:darkgray}
 .svc-table tbody tr:hover{background:rgb(120, 137, 194)}
 .svc-table td:last-child{white-space:nowrap}
+
+/* --- Saugiklis prieinamumui --- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* 1) Sekcijų atsiradimas (fade-up) */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* pritaikome pagr. sekcijoms; skirtingi delay sukuria „grandininį“ efektą */
+#about     { animation: fadeUp .7s ease-out both; animation-delay: .05s; }
+#resume    { animation: fadeUp .7s ease-out both; animation-delay: .15s; }
+#services  { animation: fadeUp .7s ease-out both; animation-delay: .25s; }
+#portfolio { animation: fadeUp .7s ease-out both; animation-delay: .35s; }
+#contact   { animation: fadeUp .7s ease-out both; animation-delay: .45s; }
+
+/* 2) Social links „pop-in“ seka (ikonos viršuje hero) */
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.6); }
+  60%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.social-links a { display:inline-flex; animation: popIn .5s ease-out both; }
+.social-links a:nth-child(1) { animation-delay: .10s; }
+.social-links a:nth-child(2) { animation-delay: .20s; }
+.social-links a:nth-child(3) { animation-delay: .30s; }
+.social-links a:nth-child(4) { animation-delay: .40s; }
+
+/* nedidelis „wiggle“ užvedus – nepakeičia funkcionalumo */
+@keyframes wiggle { 50% { transform: rotate(6deg) scale(1.06); } }
+.social-links a:hover { animation: wiggle .25s ease-in-out; }
+
+/* --- CSS-only PRELOADER: pulsuojantys taškai --- */
+#preloader{
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: #0f1326;                  /* fonas */
+  animation: preloader-hide 1.6s ease 1.6s forwards;  /* auto fade-out */
+}
+#preloader::before{
+  content:"";
+  width:12px; height:12px; border-radius:50%;
+  background:#ffffff;                    /* centrinis taškas */
+  /* šoniniai taškai per box-shadow */
+  box-shadow:
+    -28px 0 0 rgba(255,255,255,.35),
+     28px 0 0 rgba(255,255,255,.35);
+  animation: dots-pulse 1.2s ease-in-out infinite;
+}
+
+/* bangos efektas – šviečia paeiliui kairė → vidurys → dešinė */
+@keyframes dots-pulse{
+  0%, 100%{
+    background: rgba(255,255,255,.35);
+    box-shadow:
+      -28px 0 0 #fff,
+       28px 0 0 rgba(255,255,255,.35);
+    transform: translateY(0);
+  }
+  33%{
+    background:#fff;
+    box-shadow:
+      -28px 0 0 rgba(255,255,255,.35),
+       28px 0 0 rgba(255,255,255,.35);
+    transform: translateY(-3px);
+  }
+  66%{
+    background: rgba(255,255,255,.35);
+    box-shadow:
+      -28px 0 0 rgba(255,255,255,.35),
+       28px 0 0 #fff;
+    transform: translateY(0);
+  }
+}
+
+/* išnykimas */
+@keyframes preloader-hide{ to{ opacity:0; visibility:hidden; } }
+
+/* pagarba naudotojui */
+@media (prefers-reduced-motion: reduce){
+  #preloader{ animation:none; display:none; }
+}
+
+/* Vartotojams su judesio jautrumu – išjungiame/supaprastinam */
+@media (prefers-reduced-motion: reduce) {
+  /* bendros animacijos ir perėjimai */
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+
+  /* mūsų pridėtos animacijos */
+  #about, #resume, #services, #portfolio, #contact { animation: none !important; }
+  .social-links a { animation: none !important; }
+  .social-links a:hover { transform: none !important; }
+
+  /* preloader – nerodyti */
+  #preloader { animation: none !important; display: none !important; }
+
+  /* jei naudoji judančias progress bar animacijas */
+  .skills-showcase .progress-bar { animation: none !important; }
+}
+
+/* ===== 1) Anim. gradientas Services sekcijoje ===== */
+#services.section{
+  /* spalvas gali pakeisti – jos sklandžiai judės */
+  --c1:#1fef64; --c2:#6f42c1; --c3:#c1e90e;
+  background: linear-gradient(120deg, var(--c1), var(--c2), var(--c3));
+  background-size: 180% 180%;
+  animation: gradientMove 14s ease-in-out infinite;
+}
+@keyframes gradientMove{
+  0%{   background-position: 0% 50%; }
+  50%{  background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+
+/* === DAR DAUGIAU FIGŪRŲ ABOUT SKYRIUJE (be HTML keitimo) === */
+#about{ position:relative; overflow:hidden; }
+#about > *{ position:relative; z-index:1; }
+
+/* 1) „Dalelių“ laukas – daug mažų taškų (vienas sluoksnis) */
+#about {
+  --dots: radial-gradient(circle at 2px 2px, rgba(255,255,255,.25) 2px, transparent 3px);
+  background-image: var(--dots);
+  background-size: 28px 28px;                 /* tinklelis */
+  animation: dots-drift 18s linear infinite;   /* lėtas judėjimas */
+}
+@keyframes dots-drift { to { background-position: 120px 60px; } }
+
+/* 3) Plaukiojantis kvadratas prie teksto bloko */
+.content-wrapper{ position:relative; }
+.content-wrapper::after{
+  content:""; position:absolute; right:-30px; top:-20px; width:90px; height:90px;
+  background: linear-gradient(135deg, rgba(14,165,233,.35), rgba(111,66,193,.35));
+  transform: rotate(18deg);
+  animation: square-float 6s ease-in-out infinite alternate;
+  border-radius:12px;
+}
+@keyframes square-float{
+  0%   { transform: translate(0,0) rotate(18deg) scale(1); }
+  100% { transform: translate(-24px,18px) rotate(33deg) scale(1.08); }
+}
+
+/* 4) Mažas trikampių „rojus“ prie detalių tinklo */
+.details-grid{ position:relative; }
+.details-grid::before{
+  content:""; position:absolute; left:-24px; bottom:-18px;
+  border-left: 14px solid transparent;
+  border-right:14px solid transparent;
+  border-top: 22px solid rgba(31,122,239,.55);
+  filter:saturate(120%);
+  animation: tri-bob 2.6s ease-in-out infinite;
+}
+.details-grid::after{
+  content:""; position:absolute; left:6px; bottom:-6px;
+  border-left: 10px solid transparent;
+  border-right:10px solid transparent;
+  border-top: 16px solid rgba(111,66,193,.55);
+  animation: tri-bob 2.6s ease-in-out .6s infinite;
+}
+@keyframes tri-bob { 50% { transform: translateY(-8px); } }
+
+/* 5) Saugiklis judesio jautrumui */
+@media (prefers-reduced-motion: reduce){
+  #about{ animation:none; background-position:0 0; }
+  .profile-card::before,
+  .content-wrapper::after,
+  .details-grid::before,
+  .details-grid::after{ animation:none !important; }
+}
+
+/* Segmented rating (1–10) kaip mygtukų juosta */
+#contact .rating {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 6px;
+}
+
+#contact .rating input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#contact .rating label {
+  min-width: 36px;
+  padding: .4rem .55rem;
+  text-align: center;
+  border: 1px solid #2c2f36;
+  border-radius: 8px;
+  background: #15171a;
+  color: #e9ecef;
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+#contact .rating input[type="radio"]:checked + label {
+  background: #1f7aef;
+  border-color: #1f7aef;
+  color: #fff;
+}
+
+#contact .rating label:hover {
+  border-color: #3a73ff;
+}
+
+#contact .rating label:focus-visible {
+  outline: 3px solid #3a73ff77;
+  outline-offset: 2px;
+}
+#contact .form-preview{
+  background: #efefe8;
+  border: 1px solid #dddcd2;
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: #1b1c1f;
+}
+#contact .form-preview p{ margin: 0 0 .35rem 0; }
+#contact .form-preview em{ font-style: italic; }
+#contact .form-preview a{ color: #0b5ed7; text-decoration: underline; }
+
+/* (6) Sėkmės pranešimo langelis */
+#pop-ok{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: none;
+  padding: .75rem 1rem;
+  background: #12b76a;        /* žalsva sėkmės spalva */
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+#pop-ok.show{ display:block; animation:popIn .25s ease-out; }
+@keyframes popIn{
+  from{ opacity:0; transform: translateY(8px); }
+  to  { opacity:1; transform: translateY(0);   }
+}
+/* ---- Realtime validation UI (tik #feedback-form) ---- */
+#feedback-form .is-invalid{
+  border-color:#e55353!important;
+  outline:0;
+  box-shadow:0 0 0 .2rem rgba(229,83,83,.2);
+}
+#feedback-form .error-msg{
+  color:#e55353;
+  font-size:.875rem;
+  margin:.25rem 0 0;
+}
+#feedback-form button[disabled]{
+  opacity:.5;
+  cursor:not-allowed;
+}

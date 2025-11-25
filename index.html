@@ -902,10 +902,118 @@
 
               </div>
             </form>
+            <form id="feedback-form" action="#" method="post">
+              <div class="col-md-12">
+                <input type="text" name="firstName" class="form-control" placeholder="Vardas" required>
+              </div>
+              
+              <div class="col-md-12">
+                <input type="text" name="lastName" class="form-control" placeholder="Pavardė" required>
+              </div>
+
+              <div class="col-md-12">
+                <input type="text" name="email" class="form-control" placeholder="El. Paštas" required>
+              </div>
+
+              <div class="col-md-12">
+                <input type="tel" name="phone" class="form-control" placeholder="Telefono numeris" required>
+              </div>
+
+              <div class="col-md-12">
+                <input type="text" name="address" class="form-control" placeholder="Adresas" required>
+              </div>
+
+                  <!-- 1) UI/UX vertinimas -->
+              <div class="col-md-12">
+                <label class="form-label d-block">UI/UX vertinimas (1–10)</label>
+                <div class="rating" role="radiogroup" aria-label="UI/UX vertinimas">
+                  <!-- reikšmę '7' pažymėjau kaip numatytą – gali pakeisti -->
+                  <input type="radio" id="q1-1"  name="q1" value="1">
+                  <label for="q1-1">1</label>
+                  <input type="radio" id="q1-2"  name="q1" value="2">
+                  <label for="q1-2">2</label>
+                  <input type="radio" id="q1-3"  name="q1" value="3">
+                  <label for="q1-3">3</label>
+                  <input type="radio" id="q1-4"  name="q1" value="4">
+                  <label for="q1-4">4</label>
+                  <input type="radio" id="q1-5"  name="q1" value="5">
+                  <label for="q1-5">5</label>
+                  <input type="radio" id="q1-6"  name="q1" value="6">
+                  <label for="q1-6">6</label>
+                  <input type="radio" id="q1-7"  name="q1" value="7" checked>
+                  <label for="q1-7">7</label>
+                  <input type="radio" id="q1-8"  name="q1" value="8">
+                  <label for="q1-8">8</label>
+                  <input type="radio" id="q1-9"  name="q1" value="9">
+                  <label for="q1-9">9</label>
+                  <input type="radio" id="q1-10" name="q1" value="10">
+                  <label for="q1-10">10</label>
+                </div>
+              </div>
+
+              <!-- 2) Kodo kokybė -->
+              <div class="col-md-12">
+                <label class="form-label d-block">Kodo kokybė (1–10)</label>
+                <div class="rating" role="radiogroup" aria-label="Kodo kokybė">
+                  <!-- gali pažymėti default '8' -->
+                  <input type="radio" id="q2-1"  name="q2" value="1">
+                  <label for="q2-1">1</label>
+                  <input type="radio" id="q2-2"  name="q2" value="2">
+                  <label for="q2-2">2</label>
+                  <input type="radio" id="q2-3"  name="q2" value="3">
+                  <label for="q2-3">3</label>
+                  <input type="radio" id="q2-4"  name="q2" value="4">
+                  <label for="q2-4">4</label>
+                  <input type="radio" id="q2-5"  name="q2" value="5">
+                  <label for="q2-5">5</label>
+                  <input type="radio" id="q2-6"  name="q2" value="6">
+                  <label for="q2-6">6</label>
+                  <input type="radio" id="q2-7"  name="q2" value="7">
+                  <label for="q2-7">7</label>
+                  <input type="radio" id="q2-8"  name="q2" value="8" checked>
+                  <label for="q2-8">8</label>
+                  <input type="radio" id="q2-9"  name="q2" value="9">
+                  <label for="q2-9">9</label>
+                  <input type="radio" id="q2-10" name="q2" value="10">
+                  <label for="q2-10">10</label>
+                </div>
+              </div>
+
+              <!-- 3) Bendravimas -->
+              <div class="col-md-12">
+                <label class="form-label d-block">Bendravimas (1–10)</label>
+                <div class="rating" role="radiogroup" aria-label="Bendravimas">
+                  <input type="radio" id="q3-1"  name="q3" value="1">
+                  <label for="q3-1">1</label>
+                  <input type="radio" id="q3-2"  name="q3" value="2">
+                  <label for="q3-2">2</label>
+                  <input type="radio" id="q3-3"  name="q3" value="3">
+                  <label for="q3-3">3</label>
+                  <input type="radio" id="q3-4"  name="q3" value="4">
+                  <label for="q3-4">4</label>
+                  <input type="radio" id="q3-5"  name="q3" value="5">
+                  <label for="q3-5">5</label>
+                  <input type="radio" id="q3-6"  name="q3" value="6">
+                  <label for="q3-6">6</label>
+                  <input type="radio" id="q3-7"  name="q3" value="7" checked>
+                  <label for="q3-7">7</label>
+                  <input type="radio" id="q3-8"  name="q3" value="8">
+                  <label for="q3-8">8</label>
+                  <input type="radio" id="q3-9"  name="q3" value="9">
+                  <label for="q3-9">9</label>
+                  <input type="radio" id="q3-10" name="q3" value="10">
+                  <label for="q3-10">10</label>
+                </div>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+
+            <div id="form-result" class="form-preview mt-3"></div>
           </div>
-
         </div>
-
       </div>
 
     </section><!-- /Contact Section -->
@@ -995,6 +1103,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
 
 </body>
 
